@@ -4,15 +4,15 @@ import {Searchbar} from 'react-native-paper';
 
 import {MovieCard} from '../components/movie.card.component';
 
-export const MoviesScreen = () => {
-  const arr = [1, 2, 3, 5, 6, 6, 6, 6, 6];
+export const MoviesScreen = ({navigation}) => {
+  const arr = [1, 2];
   return (
     <ScrollView style={styles.searchContainer}>
       <Text style={styles.text}>What movie you wanna watch?</Text>
       <Searchbar placeholder="Type in your movie" style={styles.searchbar} />
 
       {arr.map(elem => (
-        <MovieCard />
+        <MovieCard navigation={navigation} />
       ))}
     </ScrollView>
   );
@@ -20,7 +20,7 @@ export const MoviesScreen = () => {
 
 const styles = StyleSheet.create({
   searchContainer: {
-    flex: 1,
+    height: '100%',
     paddingTop: 24,
     paddingBottom: 48,
     paddingHorizontal: 24,
