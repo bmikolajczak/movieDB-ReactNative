@@ -11,15 +11,15 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
-  View,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store';
 
 import {MoviesScreen} from './src/features/movies/screens/movies.screen';
 import {MovieScreen} from './src/features/movies/screens/movie-info.screen';
@@ -68,19 +68,17 @@ const App = () => {
   };
 
   return (
-    <NavigationContainer>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <StackNavi.Navigator>
-          <StackNavi.Screen name="MoviesList" component={MoviesScreen} />
-          <StackNavi.Screen name="MovieDetail" component={MovieScreen} />
-        </StackNavi.Navigator>
-        {/* <ScrollView>
-        <MoviesScreen />
-        <MovieScreen />
-      </ScrollView> */}
-      </SafeAreaView>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <SafeAreaView style={backgroundStyle}>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <StackNavi.Navigator>
+            <StackNavi.Screen name="MoviesList" component={MoviesScreen} />
+            <StackNavi.Screen name="MovieDetail" component={MovieScreen} />
+          </StackNavi.Navigator>
+        </SafeAreaView>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

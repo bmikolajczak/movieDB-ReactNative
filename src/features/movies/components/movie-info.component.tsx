@@ -2,32 +2,45 @@ import React from 'react';
 import {ScrollView, Image, Text, View, StyleSheet} from 'react-native';
 import {Paragraph, Title} from 'react-native-paper';
 
-export const MovieInfo = () => {
+export const MovieInfo = ({movie = {}}) => {
+  const {
+    title = 'Title here',
+    overview = 'Movie descriptrion',
+    vote_count = 0,
+    popularity = 10,
+    poster_path = 'https://i.etsystatic.com/13513569/r/il/879723/1116897704/il_570xN.1116897704_4zna.jpg',
+  }: {
+    title: string;
+    overview: string;
+    vote_count: number;
+    popularity: number;
+    poster_path: string;
+  } = movie;
+  console.log('image path:', poster_path);
   return (
-    <ScrollView style={styles.infoContainer}>
+    <View style={styles.infoContainer}>
+      <View style={styles.textContainer}>
+        <Title style={styles.title}>{title}</Title>
+        <Text style={styles.text}>Movie id: {movie.id}</Text>
+        <Text style={styles.text}>Release date: {movie.release_date}</Text>
+        <Paragraph>{overview}</Paragraph>
+      </View>
       <Image
         source={{
-          uri: 'https://m.media-amazon.com/images/I/71KPOvu-hOL._AC_SL1351_.jpg',
+          uri: `http://image.tmdb.org/t/p/w500/${poster_path}`,
         }}
       />
-      <View style={styles.textContainer}>
-        <Title style={styles.title}>Movie Title</Title>
-        <Text style={styles.text}>Movie genre</Text>
-        <Text style={styles.text}>Country of origin</Text>
-        <Paragraph>
-          Some long movie sinopsis that you can read when mega bored
-        </Paragraph>
-      </View>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   infoContainer: {
-    height: '100%',
+    paddingTop: 30,
   },
   textContainer: {
     flexDirection: 'column',
+    paddingHorizontal: 16,
   },
   text: {
     color: 'blue',
